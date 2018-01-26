@@ -348,7 +348,10 @@
   <ItemGroup>
     <ClCompile Include="demos\basic-sample.cpp" />
     <ClCompile Include="demos\demo.cpp" />
+    <ClCompile Include="pipeline\ppm-consumer.cpp" />
+    <ClCompile Include="imaging\ppm-format.cpp" />
     <ClCompile Include="lights\directional-light.cpp" />
+    <ClCompile Include="lights\spot-light.cpp" />
     <ClCompile Include="math\angle.cpp" />
     <ClCompile Include="animation\animation.cpp" />
     <ClCompile Include="animation\duration.cpp" />
@@ -430,6 +433,7 @@
     <ClCompile Include="scripting\scripting.cpp" />
     <ClCompile Include="math\transformation2d.cpp" />
     <ClCompile Include="tasks\lambda-task.cpp" />
+    <ClCompile Include="tasks\parallel-task-scheduler.cpp" />
     <ClCompile Include="tasks\serial-task-scheduler.cpp" />
     <ClCompile Include="tests\main.cpp" />
     <ClCompile Include="util\base64.cpp" />
@@ -484,7 +488,10 @@
     <ClInclude Include="command-line-parser.h" />
     <ClInclude Include="demos\demo.h" />
     <ClInclude Include="demos\demos.h" />
+    <ClInclude Include="pipeline\ppm-consumer.h" />
+    <ClInclude Include="imaging\ppm-format.h" />
     <ClInclude Include="lights\directional-light.h" />
+    <ClInclude Include="lights\spot-light.h" />
     <ClInclude Include="materials\composition-material.h" />
     <ClInclude Include="imaging\bitmap-function.h" />
     <ClInclude Include="cameras\camera.h" />
@@ -601,6 +608,7 @@
     <ClInclude Include="scripting\scripting.h" />
     <ClInclude Include="math\transformation2d.h" />
     <ClInclude Include="tasks\lambda-task.h" />
+    <ClInclude Include="tasks\parallel-task-scheduler.h" />
     <ClInclude Include="tasks\serial-task-scheduler.h" />
     <ClInclude Include="tasks\task-helpers.h" />
     <ClInclude Include="tasks\task-scheduler.h" />

@@ -16,8 +16,11 @@ team_member 'Pieter Bogemans' do
   extension BoundingBox
   #3
   extension RayTracerV5
+  extension SpotLight
+  extension Ppm
   #4
   extension RayTracerV6
+  extension ParallelScheduler
   #5
   extension MeshReading
   

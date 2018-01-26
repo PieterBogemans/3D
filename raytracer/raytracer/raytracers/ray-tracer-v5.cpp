@@ -1,5 +1,5 @@
 #include "raytracers/ray-tracer-v5.h"
-#include "raytracers/ray-tracers.h"
+
 
 using namespace imaging;
 using namespace math;
@@ -11,8 +11,8 @@ TraceResult raytracer::raytracers::_private_::RayTracerV5::trace(const Scene &sc
 
 	if (scene.root->find_first_positive_hit(ray, &hit))
 	{
-		unsigned group_id = hit.group_id;
 		double t = hit.t;
+		unsigned group_id = hit.group_id;
 		return TraceResult(trace(scene, ray, 1.0), group_id, ray, t);
 	}
 	else
@@ -30,15 +30,13 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV5::trace(const Scene 
 	{
 		Hit hit;
 
-		// Find the intersection between the reflection ray and the scene
 		if (scene.root->find_first_positive_hit(ray, &hit))
 		{
 			double t = hit.t;
 			MaterialProperties prop = hit.material->at(hit.local_position);
 
+			result += prop.ambient;
 			result += process_lights(scene, prop, hit, ray);
-
-			// Call compute_reflection and add it to the result
 			result += compute_reflection(scene, prop, ray, hit, weight);
 		}
 	}
@@ -52,19 +50,11 @@ imaging::Color raytracer::raytracers::_private_::RayTracerV5::compute_reflection
 
 	if (props.reflectivity > 0)
 	{
-		Vector3D direction_Incoming = (reflect.position - ray.origin).normalized();
+		Vector3D outgoingAlpha = (reflect.position - ray.origin).normalized().reflect_by(reflect.normal);
+		Point3D new_Origin = ray.at(reflect.t) + 0.000001 * outgoingAlpha;
+		Ray newRay = Ray(new_Origin, outgoingAlpha);
 
-		// Calculate the direction of the reflection
-		Vector3D direction_Reflected = direction_Incoming.reflect_by(reflect.normal);
-
-		// Calculate the origin of the reflection ray
-		Point3D new_Origin = ray.at(reflect.t) + 0.00000001 * direction_Reflected;
-
-		// Create a new ray with the new origin and the reflection direction
-		Ray reflection = Ray(new_Origin, direction_Reflected);
-
-		// Call trace with the new reflection ray
-		result += (props.reflectivity * trace(scene, reflection, props.reflectivity * weight));
+		result += (props.reflectivity * trace(scene, newRay, props.reflectivity * weight));
 	}
 	return result;
 }

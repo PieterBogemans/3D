@@ -1,8 +1,6 @@
 #pragma once
 
 #include "lights/point-light.h"
-#include "imaging/color.h"
-#include "math/point.h"
 #include <memory>
 
 namespace raytracer

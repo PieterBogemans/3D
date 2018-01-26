@@ -178,6 +178,10 @@ namespace
         {
             return wrap(pipeline::base64());
         }
+		std::shared_ptr<Wrapper> ppm() const
+		{
+			return wrap(pipeline::ppm());
+		}
 
         std::shared_ptr<Wrapper> stdout() const
         {
@@ -224,6 +228,7 @@ ModulePtr raytracer::scripting::_private_::create_pipeline_module()
 #   define BIND(NAME)                      BIND_AS(NAME, NAME)
 #   define BIND_AS(INTERNAL, EXTERNAL)     module->add(fun(&PipelineLibrary::INTERNAL), #EXTERNAL)
     BIND(wif);
+	BIND(ppm);
     BIND(animation);
     BIND(renderer);
     BIND_AS(wif_to_file, wif);
